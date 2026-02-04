@@ -137,7 +137,8 @@
             padding: 8px;
             background: none;
             border: none;
-            z-index: 1000;
+            z-index: 1001;
+            position: relative;
         }
 
         .hamburger span {
@@ -536,10 +537,11 @@
                 background: white;
                 flex-direction: column;
                 padding: 5rem 2rem 2rem;
-                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
                 transition: right 0.3s ease;
-                z-index: 999;
+                z-index: 1000;
                 gap: 1.5rem;
+                overflow-y: auto;
             }
 
             .nav-links.active {
@@ -555,6 +557,8 @@
                 padding: 1rem;
                 font-size: 1.1rem;
                 border-bottom: 1px solid var(--light);
+                color: var(--text);
+                font-weight: 500;
             }
             
             .logo {
@@ -574,6 +578,10 @@
             }
 
             /* Overlay when menu is open */
+            body.menu-open {
+                overflow: hidden;
+            }
+            
             body.menu-open::before {
                 content: '';
                 position: fixed;
@@ -581,8 +589,8 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: rgba(0, 0, 0, 0.5);
-                z-index: 998;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 999;
             }
         }
     </style>
@@ -690,7 +698,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="mailto:misra.gedik@yahoo.com">
+                            <a href="/cdn-cgi/l/email-protection#076a6e747566296062636e6c477e666f68682964686a">
                                 <span class="contact-icon">@</span>
                                 Email
                             </a>
@@ -705,7 +713,7 @@
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Hamburger menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
@@ -720,10 +728,13 @@
 
         // Close menu when clicking on a link
         menuItems.forEach(item => {
-            item.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-                body.classList.remove('menu-open');
+            item.addEventListener('click', (e) => {
+                // Small delay to allow smooth scroll to work
+                setTimeout(() => {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    body.classList.remove('menu-open');
+                }, 100);
             });
         });
 
@@ -731,10 +742,3 @@
         document.addEventListener('click', (e) => {
             if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
                 hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-                body.classList.remove('menu-open');
-            }
-        });
-    </script>
-</body>
-</html>

@@ -587,10 +587,11 @@
                 position: fixed;
                 top: 0;
                 left: 0;
-                width: 100%;
+                width: 30%;
                 height: 100%;
                 background: rgba(0, 0, 0, 0.6);
                 z-index: 999;
+                pointer-events: all;
             }
         }
     </style>
@@ -713,14 +714,15 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Hamburger menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         const body = document.body;
         const menuItems = document.querySelectorAll('.nav-links a');
 
-        hamburger.addEventListener('click', () => {
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
             body.classList.toggle('menu-open');
@@ -742,3 +744,10 @@
         document.addEventListener('click', (e) => {
             if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
                 hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                body.classList.remove('menu-open');
+            }
+        });
+    </script>
+</body>
+</html>
